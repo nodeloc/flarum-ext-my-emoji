@@ -1,0 +1,28 @@
+{
+  "name": "@nodeloc/flarum-ext-my-emoji",
+  "description": "Simple emoji manager for Flarum.",
+  "license": "MIT",
+  "version": "1.0.2",
+  "dependencies": {
+    "copy-webpack-plugin": "^5.1.1",
+    "emoji-mart": "^5.2",
+    "file-saver": "2.0.5",
+    "flarum-webpack-config": "0.1.0-beta.16.2",
+    "webpack": "^5.90.0",
+    "webpack-cli": "^4.7.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.6.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nodeloc/flarum-ext-my-emoji.git"
+  },
+  "scripts": {
+    "dev": "webpack --mode development --watch",
+    "build": "webpack --mode production",
+    "build-dev": "webpack --mode development --config webpack.config.js",
+    "format": "prettier --write src",
+    "format-check": "prettier --check src"
+  }
+}

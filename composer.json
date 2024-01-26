@@ -1,0 +1,44 @@
+{
+    "name": "nodeloc/flarum-ext-my-emoji",
+    "description": "Simple emoji manager for Flarum.",
+    "keywords": [
+      "flarum",
+      "emoji",
+      "picker"
+    ],
+    "type": "flarum-extension",
+    "license": "MIT",
+    "authors": [
+      {
+        "name": "James",
+        "email": "james@nodeloc.com",
+        "homepage": "https://www.nodeloc.com"
+      }
+    ],
+    "support": {
+      "issues": "https://github.com/nodeloc/flarum-ext-my-emoji/issues",
+      "source": "https://github.com/nodeloc/flarum-ext-my-emoji"
+    },
+    "require": {
+      "flarum/core": "^1.0.2"
+    },
+    "conflict": {
+      "clarkwinkelmann/flarum-ext-emojionearea": "*"
+    },
+    "autoload": {
+      "psr-4": {
+        "Nodeloc\\MyEmoji\\": "src/"
+      }
+    },
+    "extra": {
+      "flarum-extension": {
+        "title": "MyEmoji",
+        "category": "feature",
+        "icon": {
+          "name": "far fa-icons",
+          "backgroundColor": "#b72a2a",
+          "color": "#fff"
+        }
+      }
+    }
+  }

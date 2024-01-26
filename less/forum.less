@@ -1,0 +1,117 @@
+.ComposerBody-MyEmojiContainer {
+  display: inline-block;
+  z-index: @zindex-dropdown;
+
+  .emoji-picker__wrapper {
+    z-index: inherit;
+  }
+  /* 先定义 tab 样式 */
+  .MyEmoji-tab-bar button {
+    background-color: @control-bg; /* 未选中状态的背景颜色，根据实际需要调整 */
+    color: @primary-color; /* 未选中状态的文本颜色，根据实际需要调整 */
+    padding: 10px 20px; /* 适当调整按钮的内边距 */
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s; /* 添加过渡效果 */
+    border-top-left-radius: 10px; /* 上左圆角矩形效果，根据实际需要调整 */
+    border-top-right-radius: 10px; /* 上右圆角矩形效果，根据实际需要调整 */
+  }
+  /* 鼠标悬停时改变背景颜色 */
+  .MyEmoji-tab-bar button:hover {
+    background-color: @control-bg; /* 悬停时的背景颜色，根据实际需要调整 */
+  }
+
+  /* 选中状态的样式 */
+  .MyEmoji-tab-bar button.active {
+    background-color:@muted-color ; /* 选中状态的背景颜色，根据实际需要调整 */
+    color: @text-color ; /* 选中状态的文本颜色，根据实际需要调整 */
+  }
+
+  /* 如果需要底部边框 */
+  .MyEmoji-tab-bar button {
+    border-bottom: 2px solid transparent; /* 默认状态下的边框 */
+  }
+
+  /* 选中状态下的底部边框 */
+  .MyEmoji-tab-bar button.active {
+    border-bottom: 2px solid #333; /* 选中状态下的边框颜色，根据实际需要调整 */
+  }
+
+
+  .emoji-picker {
+    background-color: @body-bg;
+    hover-color: darken(fadein(@control-bg, 5%), 5%);
+    category-button-color: @muted-more-color;
+    category-button-active-color: @primary-color;
+    secondary-text-color: @muted-color;
+    text-color: @text-color;
+    border-color: @control-bg;
+    search-focus-border-color: @primary-color;
+    search-icon-color: @muted-color;
+    font: inherit;
+    font-size: 14px;
+    border-radius: @border-radius;
+    line-height: normal;
+    .box-shadow(0 2px 6px @shadow-color);
+    width: 522px;
+    height: 300px;
+    h2.emoji-picker__category-name {
+      text-transform: none;
+    }
+
+    input.emoji-picker__search {
+      background-color: @control-bg;
+      color: @control-color;
+      font-size: 13px;
+
+      &:focus {
+        border: 2px solid @primary-color;
+        color: @text-color;
+      }
+    }
+
+    div.emoji-picker__search-not-found h2 {
+      margin: 1.25em 0;
+    }
+  }
+  @media (max-width: 768px) { /* 假设 768px 是您的移动端阈值，根据实际情况调整 */
+    .emoji-picker {
+      width: 100%; /* 移动端宽度设为 100% */
+    }
+  }
+  /* Webkit 浏览器中的滚动条样式 */
+  .emoji-picker::-webkit-scrollbar {
+    width: 8px; /* 设置滚动条宽度 */
+  }
+
+  .emoji-picker::-webkit-scrollbar-thumb {
+    background-color: @primary-color; /* 设置滚动条的拖动块颜色 */
+    border-radius: 4px; /* 设置滚动条的拖动块圆角 */
+  }
+
+  .emoji-picker::-webkit-scrollbar-track {
+    background-color: @primary-color; /* 设置滚动条轨道的颜色 */
+    border-radius: 4px; /* 设置滚动条轨道的圆角 */
+  }
+
+  /* 其他浏览器中的滚动条样式，可以根据需要添加更多样式 */
+  .emoji-picker {
+    scrollbar-width: thin; /* Firefox 中滚动条的宽度 */
+  }
+
+  .emoji-picker::-moz-scrollbar-thumb {
+    background-color: @primary-color; /* Firefox 中滚动条的拖动块颜色 */
+    border-radius: 4px; /* Firefox 中滚动条的拖动块圆角 */
+  }
+
+  .emoji-picker::-moz-scrollbar-track {
+    background-color: @primary-color; /* Firefox 中滚动条轨道的颜色 */
+    border-radius: 4px; /* Firefox 中滚动条轨道的圆角 */
+  }
+}
+
+span.MyEmoji img {
+  height: 5em;
+  margin: 0.5em;
+  vertical-align: -0.5em;
+}
