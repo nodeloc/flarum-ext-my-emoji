@@ -6,10 +6,10 @@ Simple emoji manager for Flarum.
 
 Screenshots:
 
-<img width="709" alt="3" src="https://github.com/nodeloc/flarum-ext-my-emoji/assets/149086144/7f7d0129-0a12-4239-92b8-597acd0a2914">
+![Picker](https://i.imgur.com/I7l1s6O.png)
 
-<img width="311" alt="4" src="https://github.com/nodeloc/flarum-ext-my-emoji/assets/149086144/27e4ad8a-1d3f-4bc5-99ca-c3b4871d344a">
-
+- [Settings](https://i.imgur.com/hqlbvZB.png)
+- [Edit Emoji Modal](https://i.imgur.com/nonfIjB.png)
 
 ## Features
 
