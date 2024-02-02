@@ -38,7 +38,7 @@ class ConfigureTextFormatter
                 $emoji->text_to_replace,
                 '
                     <span class="MyEmoji">
-                        <img src="' . $path . '" alt="' . $emoji->title . '" />
+                        <img class="emoji" src="' . $path . '" alt="' . $emoji->title . '" />
                     </span>
                 '
             );
