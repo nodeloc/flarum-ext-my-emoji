@@ -2,24 +2,9 @@
 
 [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/nodeloc/flarum-ext-my-emoji/blob/master/LICENSE) [![Latest Stable Version](https://img.shields.io/packagist/v/nodeloc/flarum-ext-my-emoji.svg)](https://packagist.org/packages/nodeloc/flarum-ext-my-emoji) [![Total Downloads](https://img.shields.io/packagist/dt/nodeloc/flarum-ext-my-emoji.svg)](https://packagist.org/packages/nodeloc/flarum-ext-my-emoji)
 
-Simple emoji manager for Flarum.
+Simple emoji manager for Flarum. Modify from flamoji.
 
-Screenshots:
 
-![Picker](https://i.imgur.com/I7l1s6O.png)
-
-- [Settings](https://i.imgur.com/hqlbvZB.png)
-- [Edit Emoji Modal](https://i.imgur.com/nonfIjB.png)
-
-## Features
-
-- Based on [joeattardi/emoji-button](https://github.com/joeattardi/emoji-button) repository.
-- Add an emoji picker to the text editor (compatible with dark mode).
-- Show Twemoji or unicode myemoji in the picker.
-- Search myemoji in your own language.
-- Add custom myemoji to the picker.
-- Import and export custom emoji configurations.
-- Everything is dynamically loaded (no CDNs) when the picker is opened (there should be no performance impact until the user interacts with the picker).
 
 ## Installation
 

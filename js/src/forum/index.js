@@ -15,7 +15,6 @@ app.initializers.add(
 
     extend(TextEditor.prototype, 'toolbarItems', function (items) {
       items.remove('emoji');
-
       items.add(
         'MyEmoji',
         TextEditorButton.component({
