@@ -1,23 +1,20 @@
+// TextEditorButton.js - 改进的按钮组件
 import Button from 'flarum/common/components/Button';
 import Tooltip from 'flarum/common/components/Tooltip';
 
 /**
- * The `TextEditorButton` component displays a button suitable for the text
- * editor toolbar.
- *
- * So this class is only here because of
- * to set `showOnFocus={false}` on the tooltip.
+ * 改进的TextEditorButton组件，添加了更好的工具提示和样式
  */
 export default class TextEditorButton extends Button {
   view(vnode) {
     const originalView = super.view(vnode);
 
-    // Steal tooltip label from the Button superclass
+    // 从属性中获取工具提示文本
     const tooltipText = this.attrs.tooltipText || originalView.attrs.title;
     delete originalView.attrs.title;
 
     return (
-      <Tooltip showOnFocus={false} text={tooltipText}>
+      <Tooltip text={tooltipText} position="top" showOnFocus={false}>
         {originalView}
       </Tooltip>
     );
@@ -26,7 +23,7 @@ export default class TextEditorButton extends Button {
   static initAttrs(attrs) {
     super.initAttrs(attrs);
 
-    attrs.className = 'Button Button--icon Button--link Button-MyEmoji';
+    attrs.className = `Button Button--icon Button--link Button-MyEmoji ${attrs.active ? 'active' : ''}`;
     attrs.tooltipText = attrs.title;
   }
 }

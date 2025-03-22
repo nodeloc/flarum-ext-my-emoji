@@ -1,117 +1,210 @@
 .ComposerBody-MyEmojiContainer {
-  display: inline-block;
   z-index: @zindex-dropdown;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+  border-radius: @border-radius;
+  background-color: @body-bg;
+  border: 1px solid @control-bg;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 
-  .emoji-picker__wrapper {
-    z-index: inherit;
-  }
-  /* 先定义 tab 样式 */
-  .MyEmoji-tab-bar button {
-    background-color: @control-bg; /* 未选中状态的背景颜色，根据实际需要调整 */
-    color: @primary-color; /* 未选中状态的文本颜色，根据实际需要调整 */
-    padding: 10px 20px; /* 适当调整按钮的内边距 */
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s; /* 添加过渡效果 */
-    border-top-left-radius: 10px; /* 上左圆角矩形效果，根据实际需要调整 */
-    border-top-right-radius: 10px; /* 上右圆角矩形效果，根据实际需要调整 */
-  }
-  /* 鼠标悬停时改变背景颜色 */
-  .MyEmoji-tab-bar button:hover {
-    background-color: @control-bg; /* 悬停时的背景颜色，根据实际需要调整 */
+  .MyEmoji-picker {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
   }
 
-  /* 选中状态的样式 */
-  .MyEmoji-tab-bar button.active {
-    background-color:@muted-color ; /* 选中状态的背景颜色，根据实际需要调整 */
-    color: @text-color ; /* 选中状态的文本颜色，根据实际需要调整 */
-  }
+  .MyEmoji-tab-bar {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid @control-bg;
+    padding: 0 5px;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    min-height: 40px; /* 确保标签栏有最小高度 */
+    flex-shrink: 0; /* 防止标签栏被压缩 */
 
-  /* 如果需要底部边框 */
-  .MyEmoji-tab-bar button {
-    border-bottom: 2px solid transparent; /* 默认状态下的边框 */
-  }
-
-  /* 选中状态下的底部边框 */
-  .MyEmoji-tab-bar button.active {
-    border-bottom: 2px solid #333; /* 选中状态下的边框颜色，根据实际需要调整 */
-  }
-
-
-  .emoji-picker {
-    background-color: @body-bg;
-    hover-color: darken(fadein(@control-bg, 5%), 5%);
-    category-button-color: @muted-more-color;
-    category-button-active-color: @primary-color;
-    secondary-text-color: @muted-color;
-    text-color: @text-color;
-    border-color: @control-bg;
-    search-focus-border-color: @primary-color;
-    search-icon-color: @muted-color;
-    font: inherit;
-    font-size: 14px;
-    border-radius: @border-radius;
-    line-height: normal;
-    .box-shadow(0 2px 6px @shadow-color);
-    width: 522px;
-    height: 300px;
-    h2.emoji-picker__category-name {
-      text-transform: none;
+    /* 隐藏水平滚动条但保持功能 */
+    &::-webkit-scrollbar {
+      height: 3px;
     }
 
-    input.emoji-picker__search {
-      background-color: @control-bg;
-      color: @control-color;
-      font-size: 13px;
+    &::-webkit-scrollbar-thumb {
+      background-color: @muted-more-color;
+      border-radius: 3px;
+    }
 
-      &:focus {
-        border: 2px solid @primary-color;
+    button {
+      background-color: transparent;
+      color: @muted-color;
+      padding: 8px 12px;
+      margin: 0 2px;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      height: 36px; /* 固定按钮高度 */
+
+      &:hover {
+        background-color: fadeout(@control-bg, 50%);
         color: @text-color;
+      }
+
+      &.active {
+        color: @primary-color;
+        border-bottom-color: @primary-color;
+        background-color: fadeout(@control-bg, 70%);
+        font-weight: bold;
+      }
+    }
+  }
+
+  .emoji-picker {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+    min-height: 100px; /* 确保内容区域有最小高度 */
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: @control-bg;
+      border-radius: 4px;
+
+      &:hover {
+        background-color: @primary-color;
       }
     }
 
-    div.emoji-picker__search-not-found h2 {
-      margin: 1.25em 0;
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+      border-radius: 4px;
     }
   }
-  @media (max-width: 768px) { /* 假设 768px 是您的移动端阈值，根据实际情况调整 */
-    .emoji-picker {
-      width: 100%; /* 移动端宽度设为 100% */
+
+  .MyEmoji-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    gap: 8px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
     }
   }
-  /* Webkit 浏览器中的滚动条样式 */
-  .emoji-picker::-webkit-scrollbar {
-    width: 8px; /* 设置滚动条宽度 */
+
+  span.MyEmoji {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    padding: 5px;
+    border-radius: @border-radius;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: fadeout(@control-bg, 50%);
+
+    &:hover {
+      background-color: @control-bg;
+      transform: scale(1.05);
+      z-index: 1; /* 保证悬停时在顶层 */
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .emoji-lazyload {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
-  .emoji-picker::-webkit-scrollbar-thumb {
-    background-color: @primary-color; /* 设置滚动条的拖动块颜色 */
-    border-radius: 4px; /* 设置滚动条的拖动块圆角 */
+  .MyEmoji-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: @muted-color;
+    flex: 1;
   }
 
-  .emoji-picker::-webkit-scrollbar-track {
-    background-color: @primary-color; /* 设置滚动条轨道的颜色 */
-    border-radius: 4px; /* 设置滚动条轨道的圆角 */
-  }
-
-  /* 其他浏览器中的滚动条样式，可以根据需要添加更多样式 */
-  .emoji-picker {
-    scrollbar-width: thin; /* Firefox 中滚动条的宽度 */
-  }
-
-  .emoji-picker::-moz-scrollbar-thumb {
-    background-color: @primary-color; /* Firefox 中滚动条的拖动块颜色 */
-    border-radius: 4px; /* Firefox 中滚动条的拖动块圆角 */
-  }
-
-  .emoji-picker::-moz-scrollbar-track {
-    background-color: @primary-color; /* Firefox 中滚动条轨道的颜色 */
-    border-radius: 4px; /* Firefox 中滚动条轨道的圆角 */
+  .MyEmoji-load-more {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
   }
 }
 
-span.MyEmoji img {
-  height: 5em;
-  margin: 0.5em;
-  vertical-align: middle;
+/* 按钮样式 */
+.Button-MyEmoji {
+  position: relative;
+
+  &:hover {
+    color: @primary-color;
+  }
+
+  &.active {
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background-color: @primary-color;
+    }
+  }
+}
+
+/* 添加进入/退出动画 */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.ComposerBody-MyEmojiContainer {
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* 移动设备响应式样式 */
+@media (max-width: 768px) {
+  .ComposerBody-MyEmojiContainer {
+    max-height: 80vh;
+
+    .emoji-picker {
+      max-height: calc(80vh - 50px); /* 为标签栏留出空间 */
+    }
+
+    .MyEmoji-grid {
+      grid-template-columns: repeat(auto-fill, minmax(55px, 1fr)); /* 更小的尺寸适应移动屏幕 */
+    }
+  }
+}
+
+/* 黑暗主题适配 */
+.dark .ComposerBody-MyEmojiContainer {
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
+
+  span.MyEmoji {
+    background-color: fadeout(@control-bg, 80%);
+  }
 }
