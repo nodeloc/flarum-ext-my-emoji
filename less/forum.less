@@ -122,11 +122,7 @@
     transition: all 0.2s ease;
     background-color: fadeout(@control-bg, 50%);
     box-sizing: border-box;
-    .emoji {
-      height: 5em;
-      margin: 0 .5em;
-      vertical-align: -0.3em
-    }
+
     @media (max-width: 768px) {
       width: calc(22%); /* 4个每行，减去间距 */
     }
@@ -212,5 +208,12 @@
 
   span.MyEmoji {
     background-color: fadeout(@control-bg, 80%);
+  }
+}
+span.MyEmoji {
+  .emoji {
+    height: 5em;
+    margin: 0 .5em;
+    vertical-align: -0.3em
   }
 }
