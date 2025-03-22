@@ -68,8 +68,22 @@ class MyEmojiPicker extends Component {
     // 添加键盘导航
     this.boundHandleKeyDown = this.handleKeyDown.bind(this);
     document.addEventListener('keydown', this.boundHandleKeyDown);
-  }
 
+    // 强制重新计算布局
+    setTimeout(() => {
+      if (this.element) {
+        // 触发重排
+        this.element.style.display = 'none';
+        void this.element.offsetHeight; // 强制浏览器重新计算布局
+        this.element.style.display = '';
+
+        // 更新IntersectionObserver
+        if (this.emojiListElement && !this.intersectionObserver) {
+          this.setupIntersectionObserver();
+        }
+      }
+    }, 10);
+  }
   onremove(vnode) {
     super.onremove(vnode);
 
@@ -247,7 +261,10 @@ class MyEmojiPicker extends Component {
   view() {
     return m('div', {
       className: 'MyEmoji-picker',
-      onclick: (e) => e.stopPropagation()
+      onclick: (e) => e.stopPropagation(),
+      oncreate: (vnode) => {
+        this.element = vnode.dom;
+      }
     }, [
       // 分类标签栏
       m('div', { className: 'MyEmoji-tab-bar' },
