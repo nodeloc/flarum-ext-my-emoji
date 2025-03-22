@@ -7,12 +7,21 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  width: 520px; /* 固定宽度 */
+  box-sizing: border-box; /* 确保边框和内边距计入总宽度 */
+
+  /* 移动端样式 */
+  @media (max-width: 768px) {
+    width: 90%;
+    max-width: 90vw;
+  }
 
   .MyEmoji-picker {
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 100%;
+    box-sizing: border-box;
   }
 
   .MyEmoji-tab-bar {
@@ -24,6 +33,8 @@
     scrollbar-width: thin;
     min-height: 40px; /* 确保标签栏有最小高度 */
     flex-shrink: 0; /* 防止标签栏被压缩 */
+    width: 100%;
+    box-sizing: border-box;
 
     /* 隐藏水平滚动条但保持功能 */
     &::-webkit-scrollbar {
@@ -69,6 +80,8 @@
     overflow-y: auto;
     padding: 10px;
     min-height: 100px; /* 确保内容区域有最小高度 */
+    width: 100%;
+    box-sizing: border-box;
 
     &::-webkit-scrollbar {
       width: 8px;
@@ -89,35 +102,35 @@
     }
   }
 
+  /* 使用Flexbox替代Grid布局 */
   .MyEmoji-grid {
-    display: grid;
-    /* 使用固定像素值代替minmax，确保列宽稳定 */
-    grid-template-columns: repeat(6, 1fr);
-    gap: 8px;
+    display: flex;
+    flex-wrap: wrap;
     width: 100%;
     box-sizing: border-box;
-
-    @media (max-width: 768px) {
-      grid-template-columns: repeat(4, 1fr);
-    }
   }
 
   span.MyEmoji {
+    width: calc(15%); /* 6个每行，减去间距 */
+    margin: 4px;
+    aspect-ratio: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    aspect-ratio: 1; /* 保持1:1比例 */
-    padding: 5px;
     border-radius: @border-radius;
     cursor: pointer;
     transition: all 0.2s ease;
     background-color: fadeout(@control-bg, 50%);
     box-sizing: border-box;
 
+    @media (max-width: 768px) {
+      width: calc(22%); /* 4个每行，减去间距 */
+    }
+
     &:hover {
       background-color: @control-bg;
       transform: scale(1.05);
-      z-index: 1;
+      z-index: 1; /* 保证悬停时在顶层 */
     }
 
     &:active {
@@ -125,9 +138,17 @@
     }
 
     img {
-      max-width: 100%;
-      max-height: 100%;
+      max-width: 90%;
+      max-height: 90%;
       object-fit: contain;
+    }
+
+    .emoji-lazyload {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 
@@ -141,7 +162,7 @@
   }
 
   .MyEmoji-load-more {
-    grid-column: 1 / -1;
+    width: 100%;
     display: flex;
     justify-content: center;
     padding: 10px 0;
@@ -179,21 +200,6 @@
 
 .ComposerBody-MyEmojiContainer {
   animation: fadeIn 0.2s ease-out;
-}
-
-/* 移动设备响应式样式 */
-@media (max-width: 768px) {
-  .ComposerBody-MyEmojiContainer {
-    max-height: 80vh;
-
-    .emoji-picker {
-      max-height: calc(80vh - 50px); /* 为标签栏留出空间 */
-    }
-
-    .MyEmoji-grid {
-      grid-template-columns: repeat(auto-fill, minmax(55px, 1fr)); /* 更小的尺寸适应移动屏幕 */
-    }
-  }
 }
 
 /* 黑暗主题适配 */
