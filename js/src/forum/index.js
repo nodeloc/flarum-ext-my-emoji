@@ -196,11 +196,15 @@ class MyEmojiPicker extends Component {
     return this.emojiData[this.currentCategory].slice(0, this.currentPage * this.itemsPerPage);
   }
 
+
   handleScroll(e) {
     const el = e.target;
 
-    // 检查是否滚动到底部
-    if (el.scrollHeight - el.scrollTop - el.clientHeight < 50) {
+    // 更加宽松的滚动检测条件，特别是针对移动设备
+    const scrollPosition = el.scrollTop + el.clientHeight;
+    const scrollThreshold = el.scrollHeight * 0.8; // 当滚动到80%位置时加载更多
+
+    if (scrollPosition >= scrollThreshold) {
       this.loadMoreItems();
     }
   }
@@ -278,13 +282,27 @@ class MyEmojiPicker extends Component {
 
       // 表情显示区域
       m('div', {
-        className: 'emoji-picker',
-        oncreate: (vnode) => {
-          this.emojiListElement = vnode.dom;
-          this.setupIntersectionObserver();
+          className: 'emoji-picker',
+          oncreate: (vnode) => {
+            this.emojiListElement = vnode.dom;
+            this.setupIntersectionObserver();
+
+            // 添加触摸事件监听以支持移动设备
+            if ('ontouchstart' in window) {
+              vnode.dom.addEventListener('touchmove', () => {
+                // 检查滚动位置
+                const el = vnode.dom;
+                const scrollPosition = el.scrollTop + el.clientHeight;
+                const scrollThreshold = el.scrollHeight * 0.8;
+
+                if (scrollPosition >= scrollThreshold) {
+                  this.loadMoreItems();
+                }
+              });
+            }
+          },
+          onscroll: (e) => this.handleScroll(e)
         },
-        onscroll: (e) => this.handleScroll(e)
-      },
         this.loading ?
           m('div', { className: 'MyEmoji-loading' }, m(LoadingIndicator)) :
           m('div', { className: 'MyEmoji-grid' }, [

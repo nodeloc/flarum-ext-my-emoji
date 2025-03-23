@@ -191,7 +191,72 @@
     }
   }
 }
+/* 修改移动端相关样式 */
 
+/* 移动设备响应式样式 */
+@media (max-width: 768px) {
+  .ComposerBody-MyEmojiContainer {
+    width: 90%;
+    max-width: 90vw;
+    height: auto;
+    max-height: 80vh; /* 限制最大高度 */
+    display: flex;
+    flex-direction: column;
+
+    .MyEmoji-picker {
+      height: 100%;
+      max-height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .emoji-picker {
+      flex: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch; /* 增强iOS的滚动体验 */
+      max-height: calc(80vh - 50px); /* 为标签栏留出空间 */
+    }
+
+    .MyEmoji-grid {
+      padding-bottom: 40px; /* 为加载更多指示器留出空间 */
+    }
+
+    span.MyEmoji {
+      width: calc(25% - 8px); /* 4个每行 */
+      height: auto;
+    }
+
+    .MyEmoji-load-more {
+      position: relative;
+      height: 40px;
+      padding: 10px 0;
+    }
+  }
+}
+
+/* 确保加载更多指示器在移动端可见 */
+.MyEmoji-load-more {
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  margin-top: 5px;
+  clear: both;
+  height: 40px;
+}
+
+/* 修复移动端的滚动条样式 */
+.emoji-picker {
+  -webkit-overflow-scrolling: touch;
+  /* 确保触摸滚动顺畅 */
+
+  &::-webkit-scrollbar {
+    width: 4px; /* 移动端更窄的滚动条 */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+  }
+}
 /* 添加进入/退出动画 */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-10px); }
